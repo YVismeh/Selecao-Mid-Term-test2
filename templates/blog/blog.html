@@ -193,8 +193,10 @@
       <div class="container">
         <div class="d-flex justify-content-center">
           <ul>
+            {% comment %}
             <li><a href="#"><i class="bi bi-chevron-left"></i></a></li>
-            {% comment %} {% if blog.has_next and blog.has_previous %} {% endcomment %}
+             {% if blog.has_next and blog.has_previous %} 
+            {% endcomment %}
 
 
               <a href={% url 'blog:blog' %}?page={{first}}><button>first page</button>
@@ -210,9 +212,10 @@
               <a href={% url 'blog:blog' %}?page={{first}}><button>first page</button>
               <a href={% url 'blog:blog' %}?page={{blog.previous_page_number}}><button>prev page</button>
             {% endif %} 
-            {% endcomment %}
             
+
              <li><a href="#"><i class="bi bi-chevron-right"></i></a></li> 
+             {% endcomment %}
           </ul>
         </div>
       </div>
