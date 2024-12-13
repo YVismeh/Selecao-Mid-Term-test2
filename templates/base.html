@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Index - Selecao Bootstrap Template</title>
+  <title>{% block 'title' %}     {% endblock 'title' %}</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -60,10 +60,13 @@
           <li><a href={% url "blog:blog" %}>Blog</a></li>
           <li class="dropdown"><a href="#"><span>Category</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">Dropdown 1</a></li>
-              <li><a href="#">Dropdown 2</a></li>
+              {% for category in categories %}
+              <li><a href={% url "blog:blog-category" category=category.title %}>{{category.title}}</a></li>
+              {% endfor %}
+
+              {% comment %} <li><a href="#">Dropdown 2</a></li>
               <li><a href="#">Dropdown 3</a></li>
-              <li><a href="#">Dropdown 4</a></li>
+              <li><a href="#">Dropdown 4</a></li> {% endcomment %}
             </ul>
           </li>
         </ul>

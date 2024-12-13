@@ -11,6 +11,9 @@ class CategoryBlog(models.Model):
 
 class Blog(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to="blog_image", default="default.jpg")
+    image = models.ImageField(upload_to="blog", default="default.jpg")
     category = models.ManyToManyField(CategoryBlog)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.username
