@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from .models import Blog
 # Create your views here.
@@ -37,5 +37,10 @@ def blog(request, **kwargs):
 
 
 
-def blog_details(request):
-    return render(request, 'blog/blog-details.html')
+def blog_details(request, id):
+    #id = request.GET.get("id")
+    blog = get_object_or_404(Blog, id=id)
+    contex = {
+        'blog':blog,
+    }
+    return render(request, 'blog/blog-details.html', context=contex)
