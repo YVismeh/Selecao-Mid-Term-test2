@@ -3,25 +3,31 @@ from django.core.paginator import Paginator
 from .models import Blog
 # Create your views here.
 
-def blog(request, **kwargs):
-    if kwargs.get("category"):
-        blog = Blog.objects.filter(category__title=kwargs.get("category"))
+def blog(request, category=None):
+    if category is not None:
+        blog = Blog.objects.filter(category__title=category)
+        context ={
+            'blog': blog
+        }
     else:
         blog = Blog.objects.all()
+        context ={
+            'blog': blog
+        }
         
-    blog_paginate = Paginator(blog, 1)
+    blog_paginate = Paginator(blog, 2)
     first_page = 1
     last_page = blog_paginate.num_pages
 
     try:
         page_number = request.GET.get("page")
-        blog = blog_paginate.get_page(page_number)
+        blp = blog_paginate.get_page(page_number)
     except:
         page_number = first_page
-        blog = blog_paginate.get_page(first_page)
+        blp = blog_paginate.get_page(first_page)
     
     context = {
-        "blogs":blog,
+        "blogs":blp,
         "first" : first_page,
         "last" : last_page
     }
